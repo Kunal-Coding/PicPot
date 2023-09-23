@@ -1,0 +1,18 @@
+
+  
+  .mainnav-title {
+    color: #ffffff;
+  }
+
+  
+  .mainnav-title a {
+    text-decoration: none;
+    transition: color .2s ease-in-out;
+    color: #eaa582;
+  }
+  .mainnav-title a:hover {
+    color: #ffffff;
+    text-shadow: 0px 0px 10px #eaa582;
+  }
+
+  

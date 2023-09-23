@@ -1,0 +1,43 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kalam&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Merienda:wght@300&display=swap');
+
+
+* {
+  box-sizing:border-box;
+}
+
+html {
+  font-family: 'Merienda', cursive;
+  
+}
+
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #eaa582;
+    background-size:cover;
+    
+  }
+
+
+  .center {
+    width:fit-content;
+    height:fit-content;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+
+  .tring{
+
+    color:#ffffff;
+    color:#eaa582;
+    color:#e68c5f;
+    color:#3C2A21;
+    }
+    

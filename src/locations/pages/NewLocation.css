@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@700&display=swap');
+
+.container{
+    width: 100%;
+    height: 89%;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    justify-content:space-evenly;
+    
+  }
+  
+  .addlocation-container{
+      margin-top: auto;
+      margin-bottom: auto;
+      padding: 1rem;
+      width: 35rem;
+      height: fit-content;
+      border-radius: 6px;
+      color:#3C2A21;
+      background: #e68c5f;
+      box-shadow: 0px 10px 10px #3C2A21;
+      text-align: center;
+      position: absolute;
+  }
+
+  .form-control label,
+  .form-control input,
+  .form-control textarea{
+      display: block;
+  }
+  
+  .form-control{
+    margin: 1rem 0;
+  }
+  
+  .form-control p{
+    font-size: 30px;
+  }
+  
+  .form-control label{
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-size: 18px;
+    margin-bottom: 10px;
+    font-family: 'Work Sans', sans-serif;
+    height: fit-content;
+  }
+  
+  .form-control input{
+      max-width: 200px;
+      min-width: 200px;
+      height: 25px;
+      text-align: center;
+      margin: auto;
+      margin-top: 3px;
+      border-radius: 10px;
+  }
+
+  textarea{
+    max-width: 200px;
+    min-width: 200px;
+    height: 25px;
+    text-align: center;
+    margin: auto;
+    margin-top: 3px;
+    border-radius: 10px;
+    border: 2px solid #3C2A21;
+  } 
+
+  textarea:focus{
+    outline: none;
+    background: white;
+    border-color: #3C2A21;
+  }
+  
+  .form-control input:focus{
+    outline: none;
+    background: white;
+    border-color: #3C2A21;}
+  
+input::file-selector-button{
+    background-color:#3C2A21;
+      color: rgb(255, 233, 110);
+      border: 2px solid #3C2A21;
+      padding: 0.2rem 0.5rem;
+      display:block;
+      border-radius: 5px;
+      margin: auto;
+      cursor: pointer;
+      transition: background 0.1s ease-in-out, color 0.1s ease-in-out, border 0.1s ease-in-out;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 15px;
+  } 
+
+  .form-control button{
+      
+      background-color:#ffffff;
+      color: #3C2A21;
+      border: 2px solid #3C2A21;
+      padding: 0.2rem 0.5rem;
+      border-radius: 10px;
+      display: block;
+      margin: 0 auto;
+      cursor: pointer;
+      transition: background 0.1s ease-in-out, color 0.1s ease-in-out, border 0.1s ease-in-out;
+      font-family: 'Rajdhani', sans-serif;
+      font-size: 15px;
+  }
+  .form-control button:hover{
+      background-color: #3C2A21;
+      color: white;
+      border: 2px solid white;
+  }
+  
+  .form-control button:active{
+    transform: scale(0.95)
+  }
+  
+  
