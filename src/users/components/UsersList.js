@@ -16,15 +16,15 @@ const UsersList = (props) => {
             {props.items.map((user) => {
                 return (
                 <UsersItem 
-                    key = {user.id}
-                    id = {user.id}
+                    key = {user._id}
+                    id = {user._id}
                     name = {user.name}
                     pic = {user.pic}
-                    locationcount = {user.numberoflocations}
+                    locationcount = {user.locationsid.length}
                 />);
             })}
         </ul>
-    )
+    );
 };
 
 

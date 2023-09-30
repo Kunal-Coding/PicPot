@@ -4,22 +4,49 @@ import "./Login.css";
 
 const Login = () => {
   const loggedin = useContext(LoginContext);
+  const [error, setError] = useState(null);
   const [formType, setFormType] = useState("login");
   const [formData, setFormData] = useState({
     email: "",
     password: "",
     name: "",
-    phonenumber:"",
+    phonenumber: "",
   });
 
   const toggleForm = (type) => {
     setFormType(type);
   };
 
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault();
-    loggedin.login();
-    console.log("Form data: ", formData);
+    setError(null);
+
+    try {
+      let url = "http://localhost:5000/api/users/login";
+      if (formType === "signup") {
+        url = "http://localhost:5000/api/users/signup";
+      }
+
+      const response = await fetch(url, {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const responseData = await response.json();
+      console.log("login/signup response:", responseData);
+
+      if (!response.ok) {
+        throw new Error(responseData.message);
+      }
+
+      loggedin.login(responseData.message._id);
+    } catch (err) {
+      alert(err.message);
+      setError(err.message);
+    }
   };
 
   const changeHandler = (event) => {
@@ -36,9 +63,7 @@ const Login = () => {
         <ul className="tab-group">
           <li>
             <button
-              className={`${
-                formType === "signup" ? "active" : ""
-              }`}
+              className={`${formType === "signup" ? "active" : ""}`}
               onClick={() => toggleForm("signup")}
             >
               Sign Up
@@ -46,9 +71,7 @@ const Login = () => {
           </li>
           <li>
             <button
-              className={`${
-                formType === "login" ? "active" : ""
-              }`}
+              className={`${formType === "login" ? "active" : ""}`}
               onClick={() => toggleForm("login")}
             >
               Log In
@@ -59,7 +82,6 @@ const Login = () => {
         {formType === "login" ? (
           <div>
             <form onSubmit={submitHandler}>
-              {/* Your login form fields and submit button */}
               <div className="form-control">
                 <p>Welcome Back!</p>
                 <label>
@@ -92,12 +114,11 @@ const Login = () => {
         ) : (
           <div>
             <form onSubmit={submitHandler}>
-              {/* Your signup form fields and submit button */}
               <div className="form-control">
                 <p>Create your account for Free</p>
                 <label>
                   Name
-                  <input 
+                  <input
                     name="name"
                     type="text"
                     maxLength={20}

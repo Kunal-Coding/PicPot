@@ -1,39 +1,69 @@
-import React from "react";
-import {useParams} from "react-router-dom"
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
-import  LocationsList from "../components/LocationsList" 
+import LocationsList from "../components/LocationsList";
 
+const UserLocations = () => {
+  // const USER_LOCATIONS = [
+  //   {
+  //     id: "loc1",
+  //     title: "Red Fort",
+  //     desc: "The Red Fort or Lal Qila (Hindustani: [lal qila]) is a historic fort in the Old Delhi neighbourhood of Delhi, India, ",
+  //     pic: "https://assets-news.housing.com/news/wp-content/uploads/2021/07/20184714/All-about-the-Delhi-Red-Fort-or-Lal-Kila-FB-1200x700-compressed-2-686x400.jpg",
+  //     address: "W82F+4C, Adarsh Meena Colony, Dausa, Rajasthan 303303",
+  //     userid: "u1",
+  //   },
+  //   {
+  //     id: "loc2",
+  //     title: "Taj Mahal",
+  //     desc: "The Taj Mahal is an ivory-white marble mausoleum on the right bank of the river Yamuna in Agra",
+  //     pic: "https://whc.unesco.org/uploads/thumbs/site_0252_0008-750-750-20151104113424.jpg",
+  //     address: "Dharmapuri, Forest Colony, Tajganj, Agra, Uttar Pradesh 282001",
+  //     userid: "u1",
+  //   },
+  //   {
+  //     id: "loc3",
+  //     title: "Jatayu Park",
+  //     desc: "Jatayu Earth Center, is a park and tourism centre at Chadayamangalam in Kollam district of Kerala, India",
+  //     pic: "https://akm-img-a-in.tosshub.com/indiatoday/jatayustory-647_112817060030.jpg",
+  //     address:
+  //       "Jatayu Nature Park Rd, Jatayu Junction, Chadayamangalam, Kerala 691534",
+  //     userid: "u2",
+  //   },
+  // ];
+  const userid = useParams().userid;
+  const [error, setError] = useState();
+  const [savedlocations, setSavedLocations] = useState();
+  useEffect(() => {
+    const sendRequest = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:5000/api/locations/users/${userid}`
+        );
+        const responseData = await response.json();
+        console.log("userlocations:" + responseData.message);
+        if (!response.ok) {
+          throw new Error(responseData.message);
+        }
+        setSavedLocations(responseData.message);
+      } catch (err) {
+        alert(err.message, () => {
+          setError(null);
+        });
+        setError(err.message);
+      }
+    };
+    sendRequest();
+  }, [userid]);
 
-const UserLoctions = ()=>{
-    const USER_LOCATIONS = [
-        {
-            id:"loc1",
-            title:"Red Fort",
-            desc:"The Red Fort, the largest monument in Delhi, is one of its most popular tourist destinations and attracts thousands of visitors every year.",
-            pic:"https://assets-news.housing.com/news/wp-content/uploads/2021/07/20184714/All-about-the-Delhi-Red-Fort-or-Lal-Kila-FB-1200x700-compressed-2-686x400.jpg",
-            address:"Netaji Subhash Marg, Lal Qila, Chandni Chowk, New Delhi, Delhi, 110006",
-            userid: "u1"
-        },
-        {
-            id:"loc2",
-            title:"Taj Mahal",
-            desc:"The Taj Mahal is an ivory-white marble mausoleum on the right bank of the river Yamuna in Agra, Uttar Pradesh, India. ",
-            pic:"https://cdn.britannica.com/86/170586-050-AB7FEFAE/Taj-Mahal-Agra-India.jpg",
-            address:"Dharmapuri, Forest Colony, Tajganj, Agra, Uttar Pradesh 282001",
-            userid: "u1"
-        },
-        {
-            id:"loc3",
-            title:"Jatayu Park",
-            desc:"Jatayu Earth Center, also known as Jatayu Nature Park or Jatayu Rock, is a park and tourism centre at Chadayamangalam in Kollam district of Kerala, India.",
-            pic:"https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Jatayu_Earth_Centre.jpg/375px-Jatayu_Earth_Centre.jpg",
-            address:"Jatayu Nature Park Rd, Jatayu Junction, Chadayamangalam, Kerala 691534",
-            userid: "u2"
-        },
-    ];
-    const userid = useParams().userid;
-    const FILTERED_LOCATIONS = USER_LOCATIONS.filter(location => location.userid===userid)
-    return <LocationsList items = {FILTERED_LOCATIONS} />
+  // const FILTERED_LOCATIONS = USER_LOCATIONS.filter(
+  //   (location) => location.userid === userid
+  // );
+  return (
+    <React.Fragment>
+      {savedlocations && <LocationsList items={savedlocations} />}
+    </React.Fragment>
+  );
 };
 
-export  default UserLoctions;
+export default UserLocations;
